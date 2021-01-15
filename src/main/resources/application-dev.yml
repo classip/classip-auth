@@ -1,0 +1,63 @@
+server:
+  port: 6001
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:8000
+        username: zjj
+        password: zjj123
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/classip?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    username: root
+    password: zjj123
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: UTC
+eureka:
+  client:
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: http://zjj:zjj123@localhost:7776/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${server.port}:@project.version@
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    health-check-url-path:  /actuator/health
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+info:
+  version: '@project.version@'
+  groupId: '@project.groupId@'
+  artifactId: '@project.artifactId@'
+
+###feign 默认关闭熔断，请看HystrixFeignConfiguration
+feign:
+  hystrix:
+    enabled: true
+
+springdoc:
+  api-docs:
+    groups:
+      enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    display-request-duration: true
+    groups-order: DESC
+  show-actuator: true
