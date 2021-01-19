@@ -42,11 +42,6 @@ management:
       exposure:
         include: "*"
 
-info:
-  version: '@project.version@'
-  groupId: '@project.groupId@'
-  artifactId: '@project.artifactId@'
-
 ###feign 默认关闭熔断，请看HystrixFeignConfiguration
 feign:
   hystrix:

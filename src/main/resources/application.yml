@@ -3,3 +3,8 @@ spring:
     name: classip-auth
   profiles:
     active: dev
+
+info:
+  version: '@project.version@'
+  groupId: '@project.groupId@'
+  artifactId: '@project.artifactId@'
