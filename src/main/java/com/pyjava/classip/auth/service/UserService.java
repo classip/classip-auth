@@ -1,7 +1,7 @@
 package com.pyjava.classip.auth.service;
 
 import com.pyjava.classip.auth.feign.UserFeignClient;
-import com.pyjava.classip.user.dto.UserDetailForAuthDTO;
+import com.pyjava.classip.user.dto.UserAuthDetailDTO;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,9 +24,9 @@ public class UserService {
      *
      * @param username 用户名
      * @return 用户认证详细信息
-     * @see UserDetailForAuthDTO
+     * @see UserAuthDetailDTO
      */
-    public UserDetailForAuthDTO findUserDetailForAuthByUsername(String username) throws Exception {
+    public UserAuthDetailDTO findUserDetailForAuthByUsername(String username) throws Exception {
         return userFeignClient.findUserDetailForAuthByUsername(username);
     }
 }

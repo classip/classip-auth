@@ -1,6 +1,6 @@
 package com.pyjava.classip.auth.feign;
 
-import com.pyjava.classip.user.dto.UserDetailForAuthDTO;
+import com.pyjava.classip.user.dto.UserAuthDetailDTO;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,10 +18,10 @@ public class UserFeignClientFallback implements UserFeignClient {
      *
      * @param username 用户名
      * @return 用户详细信息传数对象
-     * @see UserDetailForAuthDTO
+     * @see UserAuthDetailDTO
      */
     @Override
-    public UserDetailForAuthDTO findUserDetailForAuthByUsername(String username) {
+    public UserAuthDetailDTO findUserDetailForAuthByUsername(String username) {
         return null;
     }
 }

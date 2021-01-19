@@ -1,8 +1,8 @@
 package com.pyjava.classip.auth.service;
 
-import com.pyjava.classip.user.dto.MenuDetailForAuthDTO;
-import com.pyjava.classip.user.dto.RoleDetailForAuthDTO;
-import com.pyjava.classip.user.dto.UserDetailForAuthDTO;
+import com.pyjava.classip.user.dto.MenuAuthDetailDTO;
+import com.pyjava.classip.user.dto.RoleAuthDetailDTO;
+import com.pyjava.classip.user.dto.UserAuthDetailDTO;
 import lombok.SneakyThrows;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,7 +34,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @SneakyThrows
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDetailForAuthDTO user = userService.findUserDetailForAuthByUsername(username);
+        UserAuthDetailDTO user = userService.findUserDetailForAuthByUsername(username);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         // 可用性 :true:可用 false:不可用
         boolean enabled = true;
@@ -44,15 +44,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         boolean credentialsNonExpired = true;
         // 锁定性 :true:未锁定 false:已锁定
         boolean accountNonLocked = true;
-        List<RoleDetailForAuthDTO> roles = user.getRoles();
-        for (RoleDetailForAuthDTO role : roles) {
+        List<RoleAuthDetailDTO> roles = user.getRoles();
+        for (RoleAuthDetailDTO role : roles) {
             //角色必须是ROLE_开头，可以在数据库中设置
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_" + role.getName());
             grantedAuthorities.add(grantedAuthority);
             //获取权限
-            List<MenuDetailForAuthDTO> menus = role.getMenus();
+            List<MenuAuthDetailDTO> menus = role.getMenus();
 
-            for (MenuDetailForAuthDTO menu : menus) {
+            for (MenuAuthDetailDTO menu : menus) {
                 GrantedAuthority authority = new SimpleGrantedAuthority(menu.getName());
                 grantedAuthorities.add(authority);
             }

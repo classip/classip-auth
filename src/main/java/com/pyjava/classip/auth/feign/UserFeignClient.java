@@ -1,6 +1,6 @@
 package com.pyjava.classip.auth.feign;
 
-import com.pyjava.classip.user.dto.UserDetailForAuthDTO;
+import com.pyjava.classip.user.dto.UserAuthDetailDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Primary;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +23,8 @@ public interface UserFeignClient {
      * @param username 用户名
      * @return 用户详细信息传数对象
      * @throws Exception 异常
-     * @see UserDetailForAuthDTO
+     * @see UserAuthDetailDTO
      */
     @GetMapping(value = "/user/auth/detail/{username}", produces = {"application/json"})
-    UserDetailForAuthDTO findUserDetailForAuthByUsername(@PathVariable String username) throws Exception;
+    UserAuthDetailDTO findUserDetailForAuthByUsername(@PathVariable String username) throws Exception;
 }
